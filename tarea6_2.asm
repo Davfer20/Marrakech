@@ -36,6 +36,15 @@ datos segment
     coluE           db  0
     posE            db  0
 
+    FILBi DB 9
+    COLBi DB 23
+    DIRBi DB 4
+    ASTERIX DB 'v',0AH   ; Fondo negro y arroba verde CLARO
+    PAUSA1 dw 1000
+    PAUSA2 dw 100 
+
+    direccionAlfombra db ?
+
 
 
 
@@ -43,7 +52,7 @@ datos segment
     Rotulo1         db  "Este programa simula una replica del juego de Marrakech",0 ;10,13,'$'
     Rotulo2         db  "El programa despliega una interfaz grafica en modo texto",0 ;10,13,'$'
     Rotulo3         db  "Tambien utiliza el teclado para ejecutarse y recibir instrucciones",0 ;10,13,'$'
-    Rotulo4         db  "                                                                              ",0 ;10,13,'$'
+    Rotulo4         db  "                                                                                ",0 ;10,13,'$'
     Rotulo5         db  "Digite alguna de las letras de las opciones para ejecutar una accion",0 ;10,13,'$'
     Rotulo6         db  "Para salir del programa digite una x minuscula",0 ;10,13,'$'
     Rotulo7         db  "posteriormente digite cualquier tecla para finalizar por completo",0 ;10,13,'$'
@@ -52,10 +61,12 @@ datos segment
     Rotulo10        db  "Se agrego al jugador 2",0 ;10,13,'$'
     Rotulo11        db  "Se agrego al jugador 3",0 ;10,13,'$'
     Rotulo12        db  "Se agrego al jugador 4",0 ;10,13,'$'
-    Rotulo13        db  "Haga su jugada",0 ;10,13,'$'
+    Rotulo13        db  "Haga su jugada, digite i cuando este posicionado en la casilla deseada",0 ;10,13,'$'
     Rotulo14        db  "Digite cualquier tecla si quiere regresar al menu: ",0 ;10,13,'$'
     Rotulo15        db  "Digite cualquier tecla para salir del programa: ",0 ;10,13,'$'
     RotXD           db  "HOLA XD",0 ;10,13,'$'
+
+    errorAlfombraPos db "Ingrese unicamente V o H",0
     
     titulo          db  "INICIO",0
     ayuda           db  "A -> AYUDA",0
@@ -70,7 +81,7 @@ datos segment
 
     msgFilas        db  "Ingrese la pocicion de filas: ",10,13,"$"
     msgColumnas     db  "Ingrese la pocicion de columnas: ",10,13,"$"
-    msgpocision     db  "Ingrese V o H para su pocicion: ",10,13,"$"
+    msgpocision     db  "Ingrese V o H para su pocicion: ",0 ;10,13,"$"
 
 
     marco           db  "=======================================",0
@@ -560,7 +571,7 @@ PrintMenu proc
                    call           prnRot
 
                    mov            byte ptr Fil, 4
-                   mov            byte ptr Col, 48
+                   mov            byte ptr Col, 49
                    mov            dl, Fil
                    mov            dh, Col
                    mov            bh, ColB
@@ -569,7 +580,7 @@ PrintMenu proc
                    call           prnRot
 
                    mov            byte ptr Fil, 6
-                   mov            byte ptr Col, 48
+                   mov            byte ptr Col, 49
                    mov            dl, Fil
                    mov            dh, Col
                    mov            bh, ColB
@@ -578,7 +589,7 @@ PrintMenu proc
                    call           prnRot
 
                    mov            byte ptr Fil, 8
-                   mov            byte ptr Col, 48
+                   mov            byte ptr Col, 49
                    mov            dl, Fil
                    mov            dh, Col
                    mov            bh, ColB
@@ -587,7 +598,7 @@ PrintMenu proc
                    call           prnRot
 
                    mov            byte ptr Fil, 10
-                   mov            byte ptr Col, 48
+                   mov            byte ptr Col, 49
                    mov            dl, Fil
                    mov            dh, Col
                    mov            bh, ColB
@@ -596,7 +607,7 @@ PrintMenu proc
                    call           prnRot
 
                    mov            byte ptr Fil, 12
-                   mov            byte ptr Col, 48
+                   mov            byte ptr Col, 49
                    mov            dl, Fil
                    mov            dh, Col
                    mov            bh, ColB
@@ -605,7 +616,7 @@ PrintMenu proc
                    call           prnRot
 
                    mov            byte ptr Fil, 14
-                   mov            byte ptr Col, 48
+                   mov            byte ptr Col, 49
                    mov            dl, Fil
                    mov            dh, Col
                    mov            bh, ColB
@@ -614,7 +625,7 @@ PrintMenu proc
                    call           prnRot
 
                    mov            byte ptr Fil, 16
-                   mov            byte ptr Col, 48
+                   mov            byte ptr Col, 49
                    mov            dl, Fil
                    mov            dh, Col
                    mov            bh, ColB
@@ -623,7 +634,7 @@ PrintMenu proc
                    call           prnRot
 
                    mov            byte ptr Fil, 18
-                   mov            byte ptr Col, 48
+                   mov            byte ptr Col, 49
                    mov            dl, Fil
                    mov            dh, Col
                    mov            bh, ColB
@@ -641,6 +652,273 @@ PrintMenu proc
                    ret
 
 PrintMenu endP
+
+
+
+
+Bicho proc
+                   push           ax
+                   push           bx
+                   push           cx
+                   push           dx
+                   push           di
+                   push           si
+                   push           es
+
+	MOV AX,0B800H
+        MOV ES,AX
+;		mov byte ptr FILBi, 9
+;		mov byte ptr COLBi, 23
+;		mov byte ptr ASTERIX, 'v'
+	CALL MOVIMIENTO1
+
+		   XOR AH,AH
+		   INT 16H
+		   CMP AL,'V'
+		   je vertical_1
+		   CMP AL,'H'
+		   je horizontal_1
+		   jmp siguex
+siguex:
+		   mov            byte ptr Fil, 23
+                   mov            byte ptr Col, 1
+                   mov            dl, Fil
+                   mov            dh, Col
+		   mov		  byte ptr ColB, 01000100b
+		   mov		  byte ptr ColF, 07Fh
+                   mov            bh, ColB
+                   mov            bl, ColF
+                   lea            si, errorAlfombraPos
+                   call           prnRot
+		   jmp finalBicho
+vertical_1:
+		   mov byte ptr direccionAlfombra, al
+		   jmp finalBicho
+horizontal_1:
+		   mov byte ptr direccionAlfombra, al
+		   jmp finalBicho
+
+        ;MOV AX, 4C00h
+        ;INT 21h
+
+MOVIMIENTO1 PROC NEAR
+; Este procedimiento pone el asterisco, hace una pasua y lo mueve un campo
+  
+DESPLEGAR1:
+
+		MOV AL,160           ; Calculamos BX = FIL*160+Col*2 
+	        MUL FILBi
+	        XOR BH, BH
+	        MOV BL, COLBi
+	        SHL BX,1
+	        ADD BX,AX
+
+
+
+        MOV DX,WORD PTR ES:[BX]     ; Salvamos lo que hay en la pantalla
+        MOV AX,WORD PTR ASTERIX     ; Movemos al AX el asterisco
+
+
+        MOV WORD PTR ES:[BX],AX     ; Ponemos la arroba en pantalla
+
+
+        MOV CX, PAUSA1       ; Hacemos una pausa de 100 x 1000 nops
+P1_1:     PUSH CX
+        MOV CX, PAUSA2
+P2_1:     NOP
+        LOOP P2_1
+        POP CX
+        LOOP P1_1
+
+
+        MOV WORD PTR ES:[BX],DX    ; Borramos la arroba
+        jmp revisartecla1
+
+
+
+revisartecla1:
+		;INTERRUPCION DE TECLADO
+		MOV AH,01H
+		INT 16H
+		JZ  auxilio1         
+            	JMP HAYTECLA1
+      auxilio1:  JMP DESPLEGAR1 ; Algor  
+
+;----------------------------MUEVE EL ASTERISCO---------------------------
+ALGOR1:
+
+           CMP DIRBi, 0      ; Con saltos de conejo pues ya da fuera de rango
+           JNE PREGUNTE1_1
+           JMP CERO_1
+PREGUNTE1_1: CMP DIRBi, 1      ; Con saltos de conejo pues ya da fuera de rango
+           JNE PREGUNTE2_1
+           JMP UNO_1
+PREGUNTE2_1: CMP DIRBi, 2      ; Con saltos de conejo pues ya da fuera de rango
+           JNE PREGUNTE3_1
+           JMP DOS_1
+PREGUNTE3_1: CMP DIRBi, 3      ; Con saltos de conejo pues ya da fuera de rango
+           JNE PREGUNTE8_1;4
+           JMP TRES_1
+PREGUNTE8_1: CMP DIRBi, 8      ; Con saltos de conejo pues ya da fuera de rango
+           JNE PREGUNTE9_1
+           JMP OCHO_1
+
+PREGUNTE9_1:  Jmp Repetir1
+
+
+CERO_1:  CMP FILBi,3
+       JE CD0_1   
+       DEC FILBi
+       DEC FILBi
+CD0_1:   MOV DIRBi, 0
+       JMP REPETIR1
+
+UNO_1:   CMP COLBi,5
+       JE CD1_1   
+       DEC COLBi
+       DEC COLBi
+       DEC COLBi
+       DEC COLBi
+       DEC COLBi
+       DEC COLBi
+CD1_1:   MOV DIRBi, 1
+       JMP REPETIR1
+
+DOS_1:   CMP COLBi,41
+       JE CD2_1   
+       INC COLBi
+       INC COLBi
+       INC COLBi
+       INC COLBi
+       INC COLBi
+       INC COLBi
+CD2_1:   MOV DIRBi, 2
+       JMP REPETIR1
+
+TRES_1:  CMP FILBi,15
+       JE CD3_1  
+       INC FILBi
+       INC FILBi
+CD3_1:   MOV DIRBi, 3
+       JMP REPETIR1
+
+OCHO_1:
+	jmp salir1 
+
+	;mov ah, 09h
+	;lea dx, FIL
+	;int 21h
+	;mov ah, 09h
+	;lea dx, COL
+	;int 21h
+	;mov ah, 09h
+	;lea dx, HOLAXD
+	;int 21h
+	;cmp FIL, 23
+	;je siguee1
+	;jmp REPETIR
+;siguee1:
+;	cmp COL, 1
+;	je siguee2
+;	jmp REPETIR
+;siguee2:
+;                   mov            byte ptr fil1, 24
+;                   mov            byte ptr col1, 1
+;                   mov            dl, fil1
+;                   mov            dh, col1
+;                   mov            bh, ColB
+;                   mov            bl, ColF
+;                   lea            si, HOLAXD
+;                   call           prnRot
+;
+;	jmp REPETIR
+
+
+;------------------------------------------------------------------------		
+;PROCESA LA TECLA DE FUNCION EXTENDIDA
+HAYTECLA1:	        XOR AH,AH
+			INT 16H
+			;CMP AL,'y'	;Se sale con una x minuscula
+			;JNZ siguexd1
+			;jmp SALIR1
+;siguexd1:			
+			;CMP AL,0
+			;JZ REVISE_DIR
+			;JMP ALGOR
+			
+REVISE_DIR1:	
+		S4_1:	CMP AH,72	;SI ES flecha arriba
+			JNZ S5_1
+                        MOV DIRBi,0  
+			mov byte ptr ASTERIX, '^'
+			JMP salircambiodir1
+		S5_1:	CMP AH,75	;SI ES flecha izquierda
+			JNZ S6_1
+                        MOV DIRBi,1  
+			mov byte ptr ASTERIX, '<'
+			JMP salircambiodir1
+		S6_1:	CMP AH,77	;SI ES flecha derecha
+			JNZ S7_1
+                        MOV DIRBi,2  
+			mov byte ptr ASTERIX, '>'
+			JMP salircambiodir1
+		S7_1:	CMP AH,80	;SI ES flecha abajo
+			JNZ S8_1
+                        MOV DIRBi,3  
+			mov byte ptr ASTERIX, 'v'
+			JMP salircambiodir1
+                S8_1:	CMP al, 'i' ;AH,90	;SI ES ENTER
+			JNZ S9_1
+                        MOV DIRBi,8  
+			JMP salircambiodir1
+		S9_1:
+      
+     
+ salircambiodir1:        jmp algor1    ; jmp desplegar
+                
+
+		
+			
+REPETIR1: JMP DESPLEGAR1
+
+SALIR1:  ;RET
+                   mov            byte ptr Fil, 22
+                   mov            byte ptr Col, 1
+                   mov            dl, Fil
+                   mov            dh, Col
+		   mov		  byte ptr ColB, 01000100b
+		   mov		  byte ptr ColF, 07Fh
+                   mov            bh, ColB
+                   mov            bl, ColF
+                   lea            si, msgpocision
+                   call           prnRot
+
+	RET
+
+MOVIMIENTO1 ENDP
+		   
+finalBicho:
+;		   mov            byte ptr Fil, 23
+;                   mov            byte ptr Col, 1
+;                   mov            dl, Fil
+;                   mov            dh, Col
+;		   mov		  byte ptr ColB, 01000100b
+;		   mov		  byte ptr ColF, 07Fh
+;                   mov            bh, ColB
+;                   mov            bl, ColF
+;                   lea            si, RotXD
+;                   call           prnRot		   
+                   pop            es
+                   pop            si
+                   pop            di
+                   pop            dx
+                   pop            cx
+                   pop            bx
+                   pop            ax
+                   ret
+Bicho endP
+
+
 
 
 
@@ -690,7 +968,7 @@ PrintMenu endP
     ALGOR:         
 
                    mov            byte ptr Fil, 21
-                   mov            byte ptr Col, 1
+                   mov            byte ptr Col, 0
                    mov            dl, Fil
                    mov            dh, Col
 		   mov		  byte ptr ColB, 01000100b
@@ -700,7 +978,7 @@ PrintMenu endP
                    lea            si, Rotulo4
                    call           prnRot
                    mov            byte ptr Fil, 22
-                   mov            byte ptr Col, 1
+                   mov            byte ptr Col, 0
                    mov            dl, Fil
                    mov            dh, Col
 		   mov		  byte ptr ColB, 01000100b
@@ -710,7 +988,7 @@ PrintMenu endP
                    lea            si, Rotulo4
                    call           prnRot
                    mov            byte ptr Fil, 23
-                   mov            byte ptr Col, 1
+                   mov            byte ptr Col, 0
                    mov            dl, Fil
                    mov            dh, Col
 		   mov		  byte ptr ColB, 01000100b
@@ -720,7 +998,7 @@ PrintMenu endP
                    lea            si, Rotulo4
                    call           prnRot
                    mov            byte ptr Fil, 24
-                   mov            byte ptr Col, 1
+                   mov            byte ptr Col, 0
                    mov            dl, Fil
                    mov            dh, Col
 		   mov		  byte ptr ColB, 01000100b
@@ -974,6 +1252,8 @@ PrintMenu endP
                    mov            bl, ColF
                    lea            si, Rotulo13
                    call           prnRot
+
+		   call           Bicho
 
                    jmp            salir
 
