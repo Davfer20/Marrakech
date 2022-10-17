@@ -70,7 +70,7 @@ datos segment
     FILBi                DB  9
     COLBi                DB  23
     DIRBi                DB  4
-    ASTERIX              DB  'v',0AH                                                                                             ; Fondo negro y arroba verde CLARO
+    ASTERIX              DB  'v',0AH                                                                                                                                                                                                                ; Fondo negro y arroba verde CLARO
     PAUSA1               dw  1000
     PAUSA2               dw  100
 
@@ -96,23 +96,23 @@ datos segment
 
 
     ;----------------------------Rotulos----------------------------------------
-    Rotulo1              db  "Este programa simula una replica del juego de Marrakech",0                                         ;10,13,'$'
-    Rotulo2              db  "El programa despliega una interfaz grafica en modo texto",0                                        ;10,13,'$'
-    Rotulo3              db  "Tambien utiliza el teclado para ejecutarse y recibir instrucciones",0                              ;10,13,'$'
-    Rotulo4              db  "                                                                                ",0                ;10,13,'$'
-    Rotulo5              db  "Digite alguna de las letras de las opciones para ejecutar una accion",0                            ;10,13,'$'
-    Rotulo6              db  "Para salir del programa digite una x minuscula",0                                                  ;10,13,'$'
-    Rotulo7              db  "posteriormente digite cualquier tecla para finalizar por completo",0                               ;10,13,'$'
-    Rotulo8              db  "Se creo una nueva partida",0                                                                       ;10,13,'$'
-    Rotulo9              db  "Se agrego al jugador 1",0                                                                          ;10,13,'$'
-    Rotulo10             db  "Se agrego al jugador 2",0                                                                          ;10,13,'$'
-    Rotulo11             db  "Se agrego al jugador 3",0                                                                          ;10,13,'$'
-    Rotulo12             db  "Se agrego al jugador 4",0                                                                          ;10,13,'$'
-    Rotulo13             db  "Haga su jugada, digite i cuando este posicionado en la casilla deseada",0                          ;10,13,'$'
-    Rotulo14             db  "Digite cualquier tecla si quiere regresar al menu: ",0                                             ;10,13,'$'
-    Rotulo15             db  "Digite cualquier tecla para salir del programa: ",0                                                ;10,13,'$'
+    Rotulo1              db  "Este programa simula una replica del juego de Marrakech",0                                                                                                                                                            ;10,13,'$'
+    Rotulo2              db  "El programa despliega una interfaz grafica en modo texto",0                                                                                                                                                           ;10,13,'$'
+    Rotulo3              db  "Tambien utiliza el teclado para ejecutarse y recibir instrucciones",0                                                                                                                                                 ;10,13,'$'
+    Rotulo4              db  "                                                                                ",0                                                                                                                                   ;10,13,'$'
+    Rotulo5              db  "Digite alguna de las letras de las opciones para ejecutar una accion",0                                                                                                                                               ;10,13,'$'
+    Rotulo6              db  "Para salir del programa digite una x minuscula",0                                                                                                                                                                     ;10,13,'$'
+    Rotulo7              db  "posteriormente digite cualquier tecla para finalizar por completo",0                                                                                                                                                  ;10,13,'$'
+    Rotulo8              db  "Se creo una nueva partida",0                                                                                                                                                                                          ;10,13,'$'
+    Rotulo9              db  "Se agrego al jugador 1",0                                                                                                                                                                                             ;10,13,'$'
+    Rotulo10             db  "Se agrego al jugador 2",0                                                                                                                                                                                             ;10,13,'$'
+    Rotulo11             db  "Se agrego al jugador 3",0                                                                                                                                                                                             ;10,13,'$'
+    Rotulo12             db  "Se agrego al jugador 4",0                                                                                                                                                                                             ;10,13,'$'
+    Rotulo13             db  "Haga su jugada, digite i cuando este posicionado en la casilla deseada",0                                                                                                                                             ;10,13,'$'
+    Rotulo14             db  "Digite cualquier tecla si quiere regresar al menu: ",0                                                                                                                                                                ;10,13,'$'
+    Rotulo15             db  "Digite cualquier tecla para salir del programa: ",0                                                                                                                                                                   ;10,13,'$'
     RotXD                db  "HOLA XD",0
-    errorAlfombraPos     db  "Ingrese unicamente V o H",0                                                                        ;10,13,'$'
+    errorAlfombraPos     db  "Ingrese unicamente V o H",0                                                                                                                                                                                           ;10,13,'$'
     
     titulo               db  "INICIO",0
     ayuda                db  "A -> AYUDA",0
@@ -140,18 +140,33 @@ datos segment
 
     msgFilas             db  "Ingrese la pocicion de filas: ",10,13,"$"
     msgColumnas          db  "Ingrese la pocicion de columnas: ",10,13,"$"
-    msgpocision          db  "Ingrese V o H para su pocicion: ",0                                                                ;10,13,"$"
+    msgpocision          db  "Ingrese V o H para su pocicion: ",0                                                                                                                                                                                   ;10,13,"$"
 
 
     marco                db  "=======================================",0
     marco2               db  ""
     marco3               db  "-------------oooOO-($$$)-OOooo-----------------",0
 
-    aI                   db  "I",0
-    aV                   db  "║",0
-    dIz                  db  "╚",0
-    ad                   db  "╗",0
-    ddh                  db  "╝",0
+    marco6               db  0C9h,0CDh,0CAh,0CDh,0CDh,0BBh,0C9h,0CDh,0CAh,0CDh,0CDh,0BBh,0C9h,0CDh,0CAh,0CDh,0CDh,0BBh,0C9h,0CDh,0CAh,0CDh,0CDh,0BBh,0C9h,0CDh,0CAh,0CDh,0CDh,0BBh,0C9h,0CDh,0CAh,0CDh,0CDh,0BBh,0C9h,0CDh,0CAh,0CDh,0CDh,0BBh,0
+
+    marco7               db  0C9h,0CDh,0CDh,0CDh,0CDh,0BBh,0C9h,0CDh,0CDh,0CDh,0CDh,0BBh,0C9h,0CDh,0CDh,0CDh,0CDh,0BBh,0C9h,0CDh,0CDh,0CDh,0CDh,0BBh,0C9h,0CDh,0CDh,0CDh,0CDh,0BBh,0C9h,0CDh,0CDh,0CDh,0CDh,0BBh,0C9h,0CDh,0CDh,0CDh,0CDh,0BBh,0
+
+    marco8               db  0C8h,0CDh,0CDh,0CDh,0CDh,0BCh,0C8h,0CDh,0CDh,0CDh,0CDh,0BCh,0C8h,0CDh,0CDh,0CDh,0CDh,0BCh,0C8h,0CDh,0CDh,0CDh,0CDh,0BCh,0C8h,0CDh,0CDh,0CDh,0CDh,0BCh,0C8h,0CDh,0CDh,0CDh,0CDh,0BCh,0C8h,0CDh,0CDh,0CDh,0CDh,0BCh,0
+
+    marco9               db  0C8h,0CDh,0CBh,0CDh,0CDh,0BCh,0C8h,0CDh,0CBh,0CDh,0CDh,0BCh,0C8h,0CDh,0CBh,0CDh,0CDh,0BCh,0C8h,0CDh,0CBh,0CDh,0CDh,0BCh,0C8h,0CDh,0CBh,0CDh,0CDh,0BCh,0C8h,0CDh,0CBh,0CDh,0CDh,0BCh,0C8h,0CDh,0CBh,0CDh,0CDh,0BCh,0
+
+    aT                   db  0C9h,0                                                                                                                                                                                                                 ;╔
+    ar                   db  0CCh,0                                                                                                                                                                                                                 ;╠
+    lhn                  db  0B9h,0                                                                                                                                                                                                                 ;╣
+
+    aV                   db  0BAh,0                                                                                                                                                                                                                 ;║
+    dIz                  db  0C8h,0                                                                                                                                                                                                                 ;╚
+    ad                   db  0BBh,0                                                                                                                                                                                                                 ;╗
+
+    adh                  db  0CAh,0                                                                                                                                                                                                                 ;╩
+    ddh                  db  0BCh,0                                                                                                                                                                                                                 ;╝
+    ld                   db  0CDh,0                                                                                                                                                                                                                 ;═
+    ls                   db  0CBh, 0                                                                                                                                                                                                                ;╦
 
     as                   db  "*",0
 
@@ -204,7 +219,58 @@ bordeP Macro color                                                              
                              mov            dh, Col
                              mov            bh, blue
                              mov            bl, verde
-                             lea            si, marco
+                             lea            si, marco7                          ; Marco 7 es [marco7 db  0DCh]
+                             call           PrnRot
+                             endM
+
+bordeE Macro color                                                              ;Macro con borde principal
+                             mov            dl, Fil
+                             mov            dh, Col
+                             mov            bh, blue
+                             mov            bl, verde
+                             lea            si, marco8
+                             call           PrnRot
+                             endM
+
+centro Macro
+                             local          ciclo, salirC                       ;Macro con borde principal
+                             mov            cx, 5
+                             mov            bh, blue
+                             mov            bl, verde
+                             mov            dl, Fil
+                             mov            dh, Col
+
+                             lea            si,lhn
+                             call           PrnRot
+                             inc            dh
+                             inc            dh
+                             inc            dh
+                             inc            dh
+                             inc            dh
+                             lea            si, aV
+                             call           PrnRot
+                             inc            dh
+
+    ciclo:                   
+                             lea            si, av
+                             call           PrnRot
+                             inc            dh
+                             inc            dh
+                             inc            dh
+                             inc            dh
+                             inc            dh
+                             call           PrnRot
+                             inc            dh
+                             loop           ciclo
+
+                             lea            si, av
+                             call           PrnRot
+                             inc            dh
+                             inc            dh
+                             inc            dh
+                             inc            dh
+                             inc            dh
+                             lea            si, ar
                              call           PrnRot
                              endM
 
@@ -220,12 +286,11 @@ marcoArriba Macro color                                                         
 asteriscoFila Macro color                                                       ;Macro con borde
                              mov            bh, azul
                              mov            bl, blanca
-                             lea            si, as
-                             sub            dl,1
-                             lea            si, as
+                             lea            si, dIz
                              call           PrnRot
 
-                             add            dl,1
+                             add            dh,1
+                             lea            si, ld
                              call           PrnRot
 
                              add            dh,1
@@ -241,70 +306,67 @@ asteriscoFila Macro color                                                       
                              call           PrnRot
 
                              add            dh,1
-                             call           PrnRot
-
-                             add            dh,1
-                             call           PrnRot
-
-                             sub            dl,1
+                             lea            si, ddh
                              call           PrnRot
                              endM
 
 asteriscoFila2 Macro color                                                      ;Macro con borde
                              mov            bh, azul
                              mov            bl, blanca
-                             lea            si, as
-                             sub            dh,1
-                             lea            si, as
-                             call           PrnRot
-
-                             add            dh,1
+                             lea            si, ad
                              call           PrnRot
 
                              add            dl,1
+                             lea            si, aV
                              call           PrnRot
 
                              add            dl,1
+                             lea            si, aV
                              call           PrnRot
 
-                             sub            dh,1
+                             add            dl, 1
+                             lea            si, ddh
                              call           PrnRot
 
                     
                              endM
    
-   
 asteriscoFila3 Macro color                                                      ;Macro con borde
                              mov            bh, azul
                              mov            bl, blanca
-                             lea            si, as
-                             add            dl,1
+                             lea            si, aT
+                             call           prnRot
+                             dec            ah
+
+                             inc            dh
+                             lea            si, ld
                              call           PrnRot
 
-                             sub            dl,1
+                             inc            dh
+                             lea            si, ld
                              call           PrnRot
 
-                             add            dh,1
+                             inc            dh
+                             lea            si, ld
                              call           PrnRot
 
-                             add            dh,1
+                             inc            dh
+                             lea            si, ld
                              call           PrnRot
 
-                             add            dh,1
+                             inc            dh
+                             lea            si, ld
                              call           PrnRot
 
-                             add            dh,1
+                             inc            dh
+                             lea            si, ld
                              call           PrnRot
 
-                             add            dh,1
+                             inc            ah
+                             lea            si, ad
                              call           PrnRot
 
-                             add            dh,1
-                             call           PrnRot
-
-                             add            dl,1
-                             call           PrnRot
-
+                           
                              endM
 
 asteriscoFila4 Macro color                                                      ;Macro con borde
@@ -330,117 +392,126 @@ asteriscoFila4 Macro color                                                      
 
 marcoDesign2 Macro color                                                        ;Macro con borde
     ;Parte abajo
-                             mov            dl, 17
-                             mov            dh, 5
+                             mov            dl, 22
+                             mov            dh, 4
                              asteriscoFila
 
-                             mov            dl, 17
-                             mov            dh, 17
+                             mov            dl, 22
+                             mov            dh, 16
                              asteriscoFila
 
-                             mov            dl, 17
-                             mov            dh, 29
+                             mov            dl, 22
+                             mov            dh, 28
                              asteriscoFila
 
-                             mov            dl,16
-                             mov            dh, 41
+                             mov            dl,22
+                             mov            dh, 40
+                             lea            si, dIz
                              call           PrnRot
 
-                             mov            dl,17
+                             mov            dl,22
                              mov            dh, 41
+                             lea            si, ld
                              call           PrnRot
 
-                             mov            dl,17
+                             mov            dl,22
                              mov            dh, 42
                              call           PrnRot
 
-                             mov            dl,17
+                             mov            dl,22
                              mov            dh, 43
                              call           PrnRot
 
-                             mov            dl,17
+                             mov            dl,22
                              mov            dh, 44
+                             lea            si, ddh
                              call           PrnRot
 
-                             mov            dl,17
-                             mov            dh, 45
-                             call           PrnRot
-
-                             mov            dl,16
-                             mov            dh, 45
-                             call           PrnRot
-
-                             mov            dl,15
-                             mov            dh, 45
-                             call           PrnRot
-
-                             mov            dl,15
+                             mov            dl,21
                              mov            dh, 44
+                             lea            si, aV
                              call           PrnRot
+
+                             mov            dl,20
+                             mov            dh, 44
+                             lea            si, ad
+                             call           PrnRot
+
     ; ;parte derecha
 
-                             mov            dl, 3
-                             mov            dh, 45
+                             mov            dl, 2
+                             mov            dh, 44
                              asteriscoFila2
 
-                             mov            dl, 7
-                             mov            dh, 45
+                             mov            dl, 8
+                             mov            dh, 44
                              asteriscoFila2
 
-                             mov            dl,11
-                             mov            dh, 45
+                             mov            dl,14
+                             mov            dh, 44
                              asteriscoFila2
 
-    ; ;parte arriba
+    ; ; ;parte arriba
 
-                             mov            dl,1
-                             mov            dh, 11
+                             mov            dl,0
+                             mov            dh, 10
                              asteriscoFila3
+
+                             mov            dl,0
+                             mov            dh, 22
+                             asteriscoFila3
+
+                             mov            dl,0
+                             mov            dh, 34
+                             asteriscoFila3
+
+
                     
+    ; ;Parte izquierda
 
-                             mov            dl,1
-                             mov            dh, 23
-                             asteriscoFila3
+    ;                          mov            dl,5
+    ;                          mov            dh, 0
+    ;                          asteriscoFila4
 
-                             mov            dl,1
-                             mov            dh, 35
-                             asteriscoFila3
+    ;                          mov            dl,9
+    ;                          mov            dh, 0
+    ;                          asteriscoFila4
 
-                             mov            dl,5
-                             mov            dh, 2
-                             asteriscoFila4
-
-                             mov            dl,9
-                             mov            dh, 2
-                             asteriscoFila4
-
-                             mov            dl,13
-                             mov            dh, 2
-                             asteriscoFila4
+    ;                          mov            dl,13
+    ;                          mov            dh, 0
+    ;                          asteriscoFila4
                              endM
 cubiculo Macro color                                                            ;Crea el tablero
                              local          salirC, ciclo, linea1
                              mov            dx, N
                              mov            ah, color
-                             mov            si, 484
+                             mov            si, 324
     ciclo:                   
                              cmp            dx, 0
                              je             salirC
-                             add            si, 4
+                             add            si, 2
                              mov            cx, 7
     linea1:                  
                              mov            word ptr es:[si], ax
-                             add            si,2
+                             inc            si
+                             inc            si
                              mov            word ptr es:[si], ax
-                             add            si,2
+                             inc            si
+                             inc            si
                              mov            word ptr es:[si], ax
-                             add            si,2
-                    
-                             add            si,6
-
+                             inc            si
+                             inc            si
+                             mov            word ptr es:[si], ax
+                             inc            si
+                             inc            si
+                           
+                             inc            si
+                             inc            si
+                             inc            si
+                             inc            si
                              loop           linea1
                              dec            dx
-                             add            si, 232
+                             add            si, 394                             ;(80-6*2)+80 x fila
                              jmp            ciclo
     salirC:                  
                              endM
@@ -543,33 +614,105 @@ printTablero proc
                              push           si
                              push           es
     ;Se imprimen todos los borden normles
-                             mov            byte ptr Fil, 0
-                             mov            byte ptr Col, 0
-                             marcoArriba
+    ;  mov            byte ptr Fil, 0
+    ;  mov            byte ptr Col, 0
+    ;  marcoArriba
                     
-                             mov            byte ptr Fil, 2
-                             mov            byte ptr Col, 4
-                             bordeP
+                             mov            byte ptr Fil,1
+                             mov            byte ptr Col, 2
+                             mov            dl, Fil
+                             mov            dh, Col
+                             mov            bh, blue
+                             mov            bl, verde
+                             lea            si, marco6
+
+                             call           PrnRot
+
                              mov            byte ptr Fil, 4
-                             bordeP
-                             mov            byte ptr Fil, 6
-                             bordeP
-                             mov            byte ptr Fil, 8
-                             bordeP
-                             mov            byte ptr Fil, 10
-                             bordeP
-                             mov            byte ptr Fil, 12
-                             bordeP
-                             mov            byte ptr Fil, 14
-                             bordeP
-                             mov            byte ptr Fil, 16
+                             mov            byte ptr Col, 2
                              bordeP
 
+                             mov            byte ptr Fil, 7
+                             mov            byte ptr Col, 2
+                             bordeP
+
+                             mov            byte ptr Fil, 10
+                             mov            byte ptr Col, 2
+                             bordeP
+
+                             mov            byte ptr Fil, 13
+                             mov            byte ptr Col, 2
+                             bordeP
+
+                             mov            byte ptr Fil, 16
+                             mov            byte ptr Col, 2
+                             bordeP
 
                              mov            byte ptr Fil, 19
-                             mov            byte ptr Col, 0
-                             marcoArriba
+                             mov            byte ptr Col, 2
+                             bordeP
 
+                             mov            byte ptr Fil, 2
+                             mov            byte ptr Col, 2
+                             centro
+
+                             mov            byte ptr Fil, 5
+                             mov            byte ptr Col, 2
+                             centro
+
+                             mov            byte ptr Fil, 8
+                             mov            byte ptr Col, 2
+                             centro
+
+                             mov            byte ptr Fil, 11
+                             mov            byte ptr Col, 2
+                             centro
+
+                             mov            byte ptr Fil, 14
+                             mov            byte ptr Col, 2
+                             centro
+
+                             mov            byte ptr Fil, 17
+                             mov            byte ptr Col, 2
+                             centro
+
+                             mov            byte ptr Fil, 20
+                             mov            byte ptr Col, 2
+                             centro
+
+                             mov            byte ptr Fil, 3
+                             mov            byte ptr Col, 2
+                             bordeE
+
+                             mov            byte ptr Fil, 6
+                             mov            byte ptr Col, 2
+                             bordeE
+                            
+                             mov            byte ptr Fil, 9
+                             mov            byte ptr Col, 2
+                             bordeE
+
+                             mov            byte ptr Fil, 12
+                             mov            byte ptr Col, 2
+                             bordeE
+
+                             mov            byte ptr Fil, 15
+                             mov            byte ptr Col, 2
+                             bordeE
+
+                             mov            byte ptr Fil, 18
+                             mov            byte ptr Col, 2
+                             bordeE
+
+                             mov            byte ptr Fil, 21
+                             mov            byte ptr Col, 2
+                             mov            dl, Fil
+                             mov            dh, Col
+                             mov            bh, blue
+                             mov            bl, verde
+                             lea            si, marco9                          ; Marco 7 es [marco7 db  0DCh]
+                             call           PrnRot
+                            
                              marcoDesign2
                   
                              pop            es
@@ -1597,407 +1740,409 @@ crearNuevoTablero endp
 
                              MENU
                              call           PrintMenu
+
+                             Tecla
     
-    revisartecla:            
-    ;INTERRUPCION DE TECLADO
-                             MOV            AH,01H
-                             INT            16H
-                             JZ             auxilio
-                             JMP            HAYTECLA
-    auxilio:                 jmp            revisartecla                        ;HAYTECLA ;salir;JMP DESPLEGAR ; Algor
+    ; revisartecla:
+    ; ;INTERRUPCION DE TECLADO
+    ;                          MOV            AH,01H
+    ;                          INT            16H
+    ;                          JZ             auxilio
+    ;                          JMP            HAYTECLA
+    ; auxilio:                 jmp            revisartecla                       ;HAYTECLA ;salir;JMP DESPLEGAR ; Algor
 
-    ALGOR:                   
+    ; ALGOR:
 
-                             mov            byte ptr Fil, 21
-                             mov            byte ptr Col, 0
-                             mov            dl, Fil
-                             mov            dh, Col
-                             mov            byte ptr ColB, 01000100b
-                             mov            byte ptr ColF, 07Fh
-                             mov            bh, ColB
-                             mov            bl, ColF
-                             lea            si, Rotulo4
-                             call           prnRot
-                             mov            byte ptr Fil, 22
-                             mov            byte ptr Col, 0
-                             mov            dl, Fil
-                             mov            dh, Col
-                             mov            byte ptr ColB, 01000100b
-                             mov            byte ptr ColF, 07Fh
-                             mov            bh, ColB
-                             mov            bl, ColF
-                             lea            si, Rotulo4
-                             call           prnRot
-                             mov            byte ptr Fil, 23
-                             mov            byte ptr Col, 0
-                             mov            dl, Fil
-                             mov            dh, Col
-                             mov            byte ptr ColB, 01000100b
-                             mov            byte ptr ColF, 07Fh
-                             mov            bh, ColB
-                             mov            bl, ColF
-                             lea            si, Rotulo4
-                             call           prnRot
-                             mov            byte ptr Fil, 24
-                             mov            byte ptr Col, 0
-                             mov            dl, Fil
-                             mov            dh, Col
-                             mov            byte ptr ColB, 01000100b
-                             mov            byte ptr ColF, 07Fh
-                             mov            bh, ColB
-                             mov            bl, ColF
-                             lea            si, Rotulo4
-                             call           prnRot
-
-
-                             CMP            DIR, 0                              ; Con saltos de conejo pues ya da fuera de rango
-                             JNE            PREGUNTE1
-                             JMP            CERO
-    PREGUNTE1:               CMP            DIR, 1                              ; Con saltos de conejo pues ya da fuera de rango
-                             JNE            PREGUNTE2
-                             JMP            UNO
-    PREGUNTE2:               CMP            DIR, 2                              ; Con saltos de conejo pues ya da fuera de rango
-                             JNE            PREGUNTE3
-                             JMP            DOS
-    PREGUNTE3:               CMP            DIR, 3                              ; Con saltos de conejo pues ya da fuera de rango
-                             JNE            PREGUNTE4
-                             JMP            TRES
-    PREGUNTE4:               CMP            DIR, 4                              ; Con saltos de conejo pues ya da fuera de rango
-                             JNE            PREGUNTE5
-                             JMP            CUATRO
-    PREGUNTE5:               CMP            DIR, 5
-                             JNE            PREGUNTE6
-                             JMP            CINCO
-    PREGUNTE6:               CMP            DIR, 6
-                             JNE            PREGUNTE7
-                             JMP            SEIS
-    PREGUNTE7:               CMP            DIR, 7
-                             JNE            PREGUNTE8
-                             JMP            SIETE
-    PREGUNTE8:               Jmp            salir
+    ;                          mov            byte ptr Fil, 21
+    ;                          mov            byte ptr Col, 0
+    ;                          mov            dl, Fil
+    ;                          mov            dh, Col
+    ;                          mov            byte ptr ColB, 01000100b
+    ;                          mov            byte ptr ColF, 07Fh
+    ;                          mov            bh, ColB
+    ;                          mov            bl, ColF
+    ;                          lea            si, Rotulo4
+    ;                          call           prnRot
+    ;                          mov            byte ptr Fil, 22
+    ;                          mov            byte ptr Col, 0
+    ;                          mov            dl, Fil
+    ;                          mov            dh, Col
+    ;                          mov            byte ptr ColB, 01000100b
+    ;                          mov            byte ptr ColF, 07Fh
+    ;                          mov            bh, ColB
+    ;                          mov            bl, ColF
+    ;                          lea            si, Rotulo4
+    ;                          call           prnRot
+    ;                          mov            byte ptr Fil, 23
+    ;                          mov            byte ptr Col, 0
+    ;                          mov            dl, Fil
+    ;                          mov            dh, Col
+    ;                          mov            byte ptr ColB, 01000100b
+    ;                          mov            byte ptr ColF, 07Fh
+    ;                          mov            bh, ColB
+    ;                          mov            bl, ColF
+    ;                          lea            si, Rotulo4
+    ;                          call           prnRot
+    ;                          mov            byte ptr Fil, 24
+    ;                          mov            byte ptr Col, 0
+    ;                          mov            dl, Fil
+    ;                          mov            dh, Col
+    ;                          mov            byte ptr ColB, 01000100b
+    ;                          mov            byte ptr ColF, 07Fh
+    ;                          mov            bh, ColB
+    ;                          mov            bl, ColF
+    ;                          lea            si, Rotulo4
+    ;                          call           prnRot
 
 
-    CERO:                    
+    ;                          CMP            DIR, 0                             ; Con saltos de conejo pues ya da fuera de rango
+    ;                          JNE            PREGUNTE1
+    ;                          JMP            CERO
+    ; PREGUNTE1:               CMP            DIR, 1                             ; Con saltos de conejo pues ya da fuera de rango
+    ;                          JNE            PREGUNTE2
+    ;                          JMP            UNO
+    ; PREGUNTE2:               CMP            DIR, 2                             ; Con saltos de conejo pues ya da fuera de rango
+    ;                          JNE            PREGUNTE3
+    ;                          JMP            DOS
+    ; PREGUNTE3:               CMP            DIR, 3                             ; Con saltos de conejo pues ya da fuera de rango
+    ;                          JNE            PREGUNTE4
+    ;                          JMP            TRES
+    ; PREGUNTE4:               CMP            DIR, 4                             ; Con saltos de conejo pues ya da fuera de rango
+    ;                          JNE            PREGUNTE5
+    ;                          JMP            CUATRO
+    ; PREGUNTE5:               CMP            DIR, 5
+    ;                          JNE            PREGUNTE6
+    ;                          JMP            CINCO
+    ; PREGUNTE6:               CMP            DIR, 6
+    ;                          JNE            PREGUNTE7
+    ;                          JMP            SEIS
+    ; PREGUNTE7:               CMP            DIR, 7
+    ;                          JNE            PREGUNTE8
+    ;                          JMP            SIETE
+    ; PREGUNTE8:               Jmp            salir
 
-                             mov            byte ptr Fil, 21
-                             mov            byte ptr Col, 1
-                             mov            dl, Fil
-                             mov            dh, Col
-                             mov            byte ptr ColB, 01000100b
-                             mov            byte ptr ColF, 07Fh
-                             mov            bh, ColB
-                             mov            bl, ColF
-                             lea            si, Rotulo5
-                             call           prnRot
-                             mov            byte ptr Fil, 22
-                             mov            byte ptr Col, 1
-                             mov            dl, Fil
-                             mov            dh, Col
-                             mov            byte ptr ColB, 01000100b
-                             mov            byte ptr ColF, 07Fh
-                             mov            bh, ColB
-                             mov            bl, ColF
-                             lea            si, Rotulo6
-                             call           prnRot
-                             mov            byte ptr Fil, 23
-                             mov            byte ptr Col, 1
-                             mov            dl, Fil
-                             mov            dh, Col
-                             mov            byte ptr ColB, 01000100b
-                             mov            byte ptr ColF, 07Fh
-                             mov            bh, ColB
-                             mov            bl, ColF
-                             lea            si, Rotulo7
-                             call           prnRot
 
-                             jmp            salir
+    ; CERO:
 
-    UNO:                     
-    ;                   mov            ax, 03h                         ; borra la pantalla reiniciando el modo texto a 80x25 a 16 colores
-    ;                   int            10h
-    ;                   mov            ah, 09h
-    ;                   lea            dx, Rotulo1
-    ;                   int            21h
-    ;                   mov            ah, 09h
-    ;                   lea            dx, Rotulo2
-    ;                   int            21h
-    ;                   mov            ah, 09h
-    ;                   lea            dx, Rotulo3
-    ;                   int            21h
-    ;                   mov            ah, 09h
-    ;                   lea            dx, Rotulo4
-    ;                   int            21h
+    ;                          mov            byte ptr Fil, 21
+    ;                          mov            byte ptr Col, 1
+    ;                          mov            dl, Fil
+    ;                          mov            dh, Col
+    ;                          mov            byte ptr ColB, 01000100b
+    ;                          mov            byte ptr ColF, 07Fh
+    ;                          mov            bh, ColB
+    ;                          mov            bl, ColF
+    ;                          lea            si, Rotulo5
+    ;                          call           prnRot
+    ;                          mov            byte ptr Fil, 22
+    ;                          mov            byte ptr Col, 1
+    ;                          mov            dl, Fil
+    ;                          mov            dh, Col
+    ;                          mov            byte ptr ColB, 01000100b
+    ;                          mov            byte ptr ColF, 07Fh
+    ;                          mov            bh, ColB
+    ;                          mov            bl, ColF
+    ;                          lea            si, Rotulo6
+    ;                          call           prnRot
+    ;                          mov            byte ptr Fil, 23
+    ;                          mov            byte ptr Col, 1
+    ;                          mov            dl, Fil
+    ;                          mov            dh, Col
+    ;                          mov            byte ptr ColB, 01000100b
+    ;                          mov            byte ptr ColF, 07Fh
+    ;                          mov            bh, ColB
+    ;                          mov            bl, ColF
+    ;                          lea            si, Rotulo7
+    ;                          call           prnRot
 
-                             mov            byte ptr Fil, 21
-                             mov            byte ptr Col, 1
-                             mov            dl, Fil
-                             mov            dh, Col
-                             mov            byte ptr ColB, 01000100b
-                             mov            byte ptr ColF, 07Fh
-                             mov            bh, ColB
-                             mov            bl, ColF
-                             lea            si, Rotulo1
-                             call           prnRot
-                             mov            byte ptr Fil, 22
-                             mov            byte ptr Col, 1
-                             mov            dl, Fil
-                             mov            dh, Col
-                             mov            byte ptr ColB, 01000100b
-                             mov            byte ptr ColF, 07Fh
-                             mov            bh, ColB
-                             mov            bl, ColF
-                             lea            si, Rotulo2
-                             call           prnRot
-                             mov            byte ptr Fil, 23
-                             mov            byte ptr Col, 1
-                             mov            dl, Fil
-                             mov            dh, Col
-                             mov            byte ptr ColB, 01000100b
-                             mov            byte ptr ColF, 07Fh
-                             mov            bh, ColB
-                             mov            bl, ColF
-                             lea            si, Rotulo3
-                             call           prnRot
+    ;                          jmp            salir
 
-                             jmp            salir
+    ; UNO:
+    ; ;                   mov            ax, 03h                         ; borra la pantalla reiniciando el modo texto a 80x25 a 16 colores
+    ; ;                   int            10h
+    ; ;                   mov            ah, 09h
+    ; ;                   lea            dx, Rotulo1
+    ; ;                   int            21h
+    ; ;                   mov            ah, 09h
+    ; ;                   lea            dx, Rotulo2
+    ; ;                   int            21h
+    ; ;                   mov            ah, 09h
+    ; ;                   lea            dx, Rotulo3
+    ; ;                   int            21h
+    ; ;                   mov            ah, 09h
+    ; ;                   lea            dx, Rotulo4
+    ; ;                   int            21h
 
-    DOS:                     
-    ;                   mov            ax, 03h                         ; borra la pantalla reiniciando el modo texto a 80x25 a 16 colores
-    ;                   int            10h
-    ;                   mov            ah, 09h
-    ;                   lea            dx, Rotulo8
-    ;                   int            21h
+    ;                          mov            byte ptr Fil, 21
+    ;                          mov            byte ptr Col, 1
+    ;                          mov            dl, Fil
+    ;                          mov            dh, Col
+    ;                          mov            byte ptr ColB, 01000100b
+    ;                          mov            byte ptr ColF, 07Fh
+    ;                          mov            bh, ColB
+    ;                          mov            bl, ColF
+    ;                          lea            si, Rotulo1
+    ;                          call           prnRot
+    ;                          mov            byte ptr Fil, 22
+    ;                          mov            byte ptr Col, 1
+    ;                          mov            dl, Fil
+    ;                          mov            dh, Col
+    ;                          mov            byte ptr ColB, 01000100b
+    ;                          mov            byte ptr ColF, 07Fh
+    ;                          mov            bh, ColB
+    ;                          mov            bl, ColF
+    ;                          lea            si, Rotulo2
+    ;                          call           prnRot
+    ;                          mov            byte ptr Fil, 23
+    ;                          mov            byte ptr Col, 1
+    ;                          mov            dl, Fil
+    ;                          mov            dh, Col
+    ;                          mov            byte ptr ColB, 01000100b
+    ;                          mov            byte ptr ColF, 07Fh
+    ;                          mov            bh, ColB
+    ;                          mov            bl, ColF
+    ;                          lea            si, Rotulo3
+    ;                          call           prnRot
 
-                             mov            byte ptr Fil, 21
-                             mov            byte ptr Col, 1
-                             mov            dl, Fil
-                             mov            dh, Col
-                             mov            byte ptr ColB, 01000100b
-                             mov            byte ptr ColF, 07Fh
-                             mov            bh, ColB
-                             mov            bl, ColF
-                             lea            si, Rotulo8
-                             call           prnRot
+    ;                          jmp            salir
 
-                             jmp            salir
+    ; DOS:
+    ; ;                   mov            ax, 03h                         ; borra la pantalla reiniciando el modo texto a 80x25 a 16 colores
+    ; ;                   int            10h
+    ; ;                   mov            ah, 09h
+    ; ;                   lea            dx, Rotulo8
+    ; ;                   int            21h
 
-    TRES:                    
-    ;                   mov            ax, 03h                         ; borra la pantalla reiniciando el modo texto a 80x25 a 16 colores
-    ;                   int            10h
-    ;                   mov            ah, 09h
-    ;                   lea            dx, Rotulo9
-    ;                   int            21h
+    ;                          mov            byte ptr Fil, 21
+    ;                          mov            byte ptr Col, 1
+    ;                          mov            dl, Fil
+    ;                          mov            dh, Col
+    ;                          mov            byte ptr ColB, 01000100b
+    ;                          mov            byte ptr ColF, 07Fh
+    ;                          mov            bh, ColB
+    ;                          mov            bl, ColF
+    ;                          lea            si, Rotulo8
+    ;                          call           prnRot
 
-                             mov            byte ptr Fil, 21
-                             mov            byte ptr Col, 1
-                             mov            dl, Fil
-                             mov            dh, Col
-                             mov            byte ptr ColB, 01000100b
-                             mov            byte ptr ColF, 07Fh
-                             mov            bh, ColB
-                             mov            bl, ColF
-                             lea            si, Rotulo9
-                             call           prnRot
+    ;                          jmp            salir
 
-                             jmp            salir
+    ; TRES:
+    ; ;                   mov            ax, 03h                         ; borra la pantalla reiniciando el modo texto a 80x25 a 16 colores
+    ; ;                   int            10h
+    ; ;                   mov            ah, 09h
+    ; ;                   lea            dx, Rotulo9
+    ; ;                   int            21h
 
-    CUATRO:                  
-    ;                   mov            ax, 03h                         ; borra la pantalla reiniciando el modo texto a 80x25 a 16 colores
-    ;                   int            10h
-    ;                   mov            ah, 09h
-    ;                   lea            dx, Rotulo10
-    ;                   int            21h
+    ;                          mov            byte ptr Fil, 21
+    ;                          mov            byte ptr Col, 1
+    ;                          mov            dl, Fil
+    ;                          mov            dh, Col
+    ;                          mov            byte ptr ColB, 01000100b
+    ;                          mov            byte ptr ColF, 07Fh
+    ;                          mov            bh, ColB
+    ;                          mov            bl, ColF
+    ;                          lea            si, Rotulo9
+    ;                          call           prnRot
 
-                             mov            byte ptr Fil, 21
-                             mov            byte ptr Col, 1
-                             mov            dl, Fil
-                             mov            dh, Col
-                             mov            byte ptr ColB, 01000100b
-                             mov            byte ptr ColF, 07Fh
-                             mov            bh, ColB
-                             mov            bl, ColF
-                             lea            si, Rotulo10
-                             call           prnRot
+    ;                          jmp            salir
 
-                             jmp            salir
+    ; CUATRO:
+    ; ;                   mov            ax, 03h                         ; borra la pantalla reiniciando el modo texto a 80x25 a 16 colores
+    ; ;                   int            10h
+    ; ;                   mov            ah, 09h
+    ; ;                   lea            dx, Rotulo10
+    ; ;                   int            21h
 
-    CINCO:                   
-    ;                   mov            ax, 03h                         ; borra la pantalla reiniciando el modo texto a 80x25 a 16 colores
-    ;                   int            10h
-    ;                   mov            ah, 09h
-    ;                   lea            dx, Rotulo11
-    ;                   int            21h
+    ;                          mov            byte ptr Fil, 21
+    ;                          mov            byte ptr Col, 1
+    ;                          mov            dl, Fil
+    ;                          mov            dh, Col
+    ;                          mov            byte ptr ColB, 01000100b
+    ;                          mov            byte ptr ColF, 07Fh
+    ;                          mov            bh, ColB
+    ;                          mov            bl, ColF
+    ;                          lea            si, Rotulo10
+    ;                          call           prnRot
 
-                             mov            byte ptr Fil, 21
-                             mov            byte ptr Col, 1
-                             mov            dl, Fil
-                             mov            dh, Col
-                             mov            byte ptr ColB, 01000100b
-                             mov            byte ptr ColF, 07Fh
-                             mov            bh, ColB
-                             mov            bl, ColF
-                             lea            si, Rotulo11
-                             call           prnRot
+    ;                          jmp            salir
 
-                             jmp            salir
+    ; CINCO:
+    ; ;                   mov            ax, 03h                         ; borra la pantalla reiniciando el modo texto a 80x25 a 16 colores
+    ; ;                   int            10h
+    ; ;                   mov            ah, 09h
+    ; ;                   lea            dx, Rotulo11
+    ; ;                   int            21h
 
-    SEIS:                    
-    ;                   mov            ax, 03h                         ; borra la pantalla reiniciando el modo texto a 80x25 a 16 colores
-    ;                   int            10h
-    ;                   mov            ah, 09h
-    ;                   lea            dx, Rotulo12
-    ;                   int            21h
+    ;                          mov            byte ptr Fil, 21
+    ;                          mov            byte ptr Col, 1
+    ;                          mov            dl, Fil
+    ;                          mov            dh, Col
+    ;                          mov            byte ptr ColB, 01000100b
+    ;                          mov            byte ptr ColF, 07Fh
+    ;                          mov            bh, ColB
+    ;                          mov            bl, ColF
+    ;                          lea            si, Rotulo11
+    ;                          call           prnRot
 
-                             mov            byte ptr Fil, 21
-                             mov            byte ptr Col, 1
-                             mov            dl, Fil
-                             mov            dh, Col
-                             mov            byte ptr ColB, 01000100b
-                             mov            byte ptr ColF, 07Fh
-                             mov            bh, ColB
-                             mov            bl, ColF
-                             lea            si, Rotulo12
-                             call           prnRot
+    ;                          jmp            salir
 
-                             jmp            salir
+    ; SEIS:
+    ; ;                   mov            ax, 03h                         ; borra la pantalla reiniciando el modo texto a 80x25 a 16 colores
+    ; ;                   int            10h
+    ; ;                   mov            ah, 09h
+    ; ;                   lea            dx, Rotulo12
+    ; ;                   int            21h
 
-    SIETE:                   
-    ;                   mov            ax, 03h                         ; borra la pantalla reiniciando el modo texto a 80x25 a 16 colores
-    ;                   int            10h
-    ;                   mov            ah, 09h
-    ;                   lea            dx, Rotulo13
-    ;                   int            21h
+    ;                          mov            byte ptr Fil, 21
+    ;                          mov            byte ptr Col, 1
+    ;                          mov            dl, Fil
+    ;                          mov            dh, Col
+    ;                          mov            byte ptr ColB, 01000100b
+    ;                          mov            byte ptr ColF, 07Fh
+    ;                          mov            bh, ColB
+    ;                          mov            bl, ColF
+    ;                          lea            si, Rotulo12
+    ;                          call           prnRot
 
-                             mov            byte ptr Fil, 21
-                             mov            byte ptr Col, 1
-                             mov            dl, Fil
-                             mov            dh, Col
-                             mov            byte ptr ColB, 01000100b
-                             mov            byte ptr ColF, 07Fh
-                             mov            bh, ColB
-                             mov            bl, ColF
-                             lea            si, Rotulo13
-                             call           prnRot
+    ;                          jmp            salir
 
-                             call           Bicho
+    ; SIETE:
+    ; ;                   mov            ax, 03h                         ; borra la pantalla reiniciando el modo texto a 80x25 a 16 colores
+    ; ;                   int            10h
+    ; ;                   mov            ah, 09h
+    ; ;                   lea            dx, Rotulo13
+    ; ;                   int            21h
 
-                             jmp            salir
+    ;                          mov            byte ptr Fil, 21
+    ;                          mov            byte ptr Col, 1
+    ;                          mov            dl, Fil
+    ;                          mov            dh, Col
+    ;                          mov            byte ptr ColB, 01000100b
+    ;                          mov            byte ptr ColF, 07Fh
+    ;                          mov            bh, ColB
+    ;                          mov            bl, ColF
+    ;                          lea            si, Rotulo13
+    ;                          call           prnRot
 
-    ;PROCESA LA TECLA DE FUNCION EXTENDIDA
-    HAYTECLA:                
-    ;                   mov            ah, 09h
-    ;                   lea            dx, RotXD
-    ;                   int            21h
-                             XOR            AH,AH
-                             INT            16H
-                             CMP            AL,'x'                              ;Se sale con una x minuscula
-                             JZ             fin1
-                             jmp            REVISE_DIR
-    fin1:                    jmp            fin
+    ;                          call           Bicho
+
+    ;                          jmp            salir
+
+    ; ;PROCESA LA TECLA DE FUNCION EXTENDIDA
+    ; HAYTECLA:
+    ; ;                   mov            ah, 09h
+    ; ;                   lea            dx, RotXD
+    ; ;                   int            21h
+    ;                          XOR            AH,AH
+    ;                          INT            16H
+    ;                          CMP            AL,'x'                             ;Se sale con una x minuscula
+    ;                          JZ             fin1
+    ;                          jmp            REVISE_DIR
+    ; fin1:                    jmp            fin
 			
-    ;CMP AL,0
-    ;JZ REVISE_DIR
-    ;JMP ALGOR
+    ; ;CMP AL,0
+    ; ;JZ REVISE_DIR
+    ; ;JMP ALGOR
 			
-    REVISE_DIR:                                                                 ;CMP AH,47H	;SI ES HOME
-    ;	JNE S1
-    ;	MOV DIR,4
-    ;	JMP salircambiodir
-    ;S1:	CMP AH,49H	;SI ES PG UP
-    ;	JNZ S2
-    ;	MOV DIR,7
-    ;	JMP salircambiodir
-    ;S2:	CMP AH,4FH	;SI ES END
-    ;	JNZ S3
-    ;	MOV DIR,5
-    ;	JMP salircambiodir
-    ;S3:	CMP AH,51H	;SI ES PG DN
-    ;	JNZ S4
-    ;       MOV DIR,6
-    ;	JMP salircambiodir
-    S4:                                                                         ;CMP AH,1C	;SI ES A
-                             cmp            al, 'A'
-                             JNZ            S5
-                             MOV            DIR,0
-                             JMP            salircambiodir
-    S5:                                                                         ;CMP AH,32	;SI ES B
-                             cmp            al, 'B'
-                             JNZ            S6
-                             MOV            DIR,1
-                             JMP            salircambiodir
-    S6:                                                                         ;CMP AH,21	;SI ES C
-                             cmp            al, 'C'
-                             JNZ            S7
-                             MOV            DIR,2
-                             JMP            salircambiodir
-    S7:                                                                         ;CMP AH,23	;SI ES D
-                             cmp            al, 'D'
-                             JNZ            S8
-                             MOV            DIR,3
-                             JMP            salircambiodir
-    S8:                                                                         ;CMP AH,24	;SI ES E
-                             cmp            al, 'E'
-                             JNZ            S9
-                             MOV            DIR,4
-                             JMP            salircambiodir
-    S9:                                                                         ;CMP AH,2B	;SI ES F
-                             cmp            al, 'F'
-                             JNZ            S10
-                             MOV            DIR,5
-                             JMP            salircambiodir
-    S10:                                                                        ;CMP AH,34	;SI ES G
-                             cmp            al, 'G'
-                             JNZ            S11
-                             MOV            DIR,6
-                             JMP            salircambiodir
-    S11:                                                                        ;CMP AH,33	;SI ES H
-                             cmp            al, 'H'
-                             JNZ            S12
-                             MOV            DIR,7
-                             JMP            salircambiodir
-    S12:                     
+    ; REVISE_DIR:                                                                ;CMP AH,47H	;SI ES HOME
+    ; ;	JNE S1
+    ; ;	MOV DIR,4
+    ; ;	JMP salircambiodir
+    ; ;S1:	CMP AH,49H	;SI ES PG UP
+    ; ;	JNZ S2
+    ; ;	MOV DIR,7
+    ; ;	JMP salircambiodir
+    ; ;S2:	CMP AH,4FH	;SI ES END
+    ; ;	JNZ S3
+    ; ;	MOV DIR,5
+    ; ;	JMP salircambiodir
+    ; ;S3:	CMP AH,51H	;SI ES PG DN
+    ; ;	JNZ S4
+    ; ;       MOV DIR,6
+    ; ;	JMP salircambiodir
+    ; S4:                                                                        ;CMP AH,1C	;SI ES A
+    ;                          cmp            al, 'A'
+    ;                          JNZ            S5
+    ;                          MOV            DIR,0
+    ;                          JMP            salircambiodir
+    ; S5:                                                                        ;CMP AH,32	;SI ES B
+    ;                          cmp            al, 'B'
+    ;                          JNZ            S6
+    ;                          MOV            DIR,1
+    ;                          JMP            salircambiodir
+    ; S6:                                                                        ;CMP AH,21	;SI ES C
+    ;                          cmp            al, 'C'
+    ;                          JNZ            S7
+    ;                          MOV            DIR,2
+    ;                          JMP            salircambiodir
+    ; S7:                                                                        ;CMP AH,23	;SI ES D
+    ;                          cmp            al, 'D'
+    ;                          JNZ            S8
+    ;                          MOV            DIR,3
+    ;                          JMP            salircambiodir
+    ; S8:                                                                        ;CMP AH,24	;SI ES E
+    ;                          cmp            al, 'E'
+    ;                          JNZ            S9
+    ;                          MOV            DIR,4
+    ;                          JMP            salircambiodir
+    ; S9:                                                                        ;CMP AH,2B	;SI ES F
+    ;                          cmp            al, 'F'
+    ;                          JNZ            S10
+    ;                          MOV            DIR,5
+    ;                          JMP            salircambiodir
+    ; S10:                                                                       ;CMP AH,34	;SI ES G
+    ;                          cmp            al, 'G'
+    ;                          JNZ            S11
+    ;                          MOV            DIR,6
+    ;                          JMP            salircambiodir
+    ; S11:                                                                       ;CMP AH,33	;SI ES H
+    ;                          cmp            al, 'H'
+    ;                          JNZ            S12
+    ;                          MOV            DIR,7
+    ;                          JMP            salircambiodir
+    ; S12:
       
      
-    salircambiodir:          jmp            algor                               ; jmp desplegar
+    ; salircambiodir:          jmp            algor                              ; jmp desplegar
 
 
-    salir:                   
-    ;                   mov            ah, 09h
-    ;                   lea            dx, Rotulo14
-    ;                   int            21h
+    ; salir:
+    ; ;                   mov            ah, 09h
+    ; ;                   lea            dx, Rotulo14
+    ; ;                   int            21h
 
-                             mov            byte ptr Fil, 24
-                             mov            byte ptr Col, 1
-                             mov            dl, Fil
-                             mov            dh, Col
-                             mov            byte ptr ColB, 01000100b
-                             mov            byte ptr ColF, 07Fh
-                             mov            bh, ColB
-                             mov            bl, ColF
-                             lea            si, Rotulo14
-                             call           prnRot
+    ;                          mov            byte ptr Fil, 24
+    ;                          mov            byte ptr Col, 1
+    ;                          mov            dl, Fil
+    ;                          mov            dh, Col
+    ;                          mov            byte ptr ColB, 01000100b
+    ;                          mov            byte ptr ColF, 07Fh
+    ;                          mov            bh, ColB
+    ;                          mov            bl, ColF
+    ;                          lea            si, Rotulo14
+    ;                          call           prnRot
 
-                             Tecla
-                             jmp            programa
-    fin:                     
-    ;                   mov            ah, 09h
-    ;                   lea            dx, Rotulo15
-    ;                   int            21h
+    ;                          Tecla
+    ;                          jmp            programa
+    ; fin:
+    ; ;                   mov            ah, 09h
+    ; ;                   lea            dx, Rotulo15
+    ; ;                   int            21h
 
-                             mov            byte ptr Fil, 21
-                             mov            byte ptr Col, 1
-                             mov            dl, Fil
-                             mov            dh, Col
-                             mov            byte ptr ColB, 01000100b
-                             mov            byte ptr ColF, 07Fh
-                             mov            bh, ColB
-                             mov            bl, ColF
-                             lea            si, Rotulo15
-                             call           prnRot
+    ;                          mov            byte ptr Fil, 21
+    ;                          mov            byte ptr Col, 1
+    ;                          mov            dl, Fil
+    ;                          mov            dh, Col
+    ;                          mov            byte ptr ColB, 01000100b
+    ;                          mov            byte ptr ColF, 07Fh
+    ;                          mov            bh, ColB
+    ;                          mov            bl, ColF
+    ;                          lea            si, Rotulo15
+    ;                          call           prnRot
 
-                             Tecla
-                             mov            ax, 03h                             ; borra la pantalla reiniciando el modo texto a 80x25 a 16 colores
-                             int            10h
+    ;                          Tecla
+    ;                          mov            ax, 03h                            ; borra la pantalla reiniciando el modo texto a 80x25 a 16 colores
+    ;                          int            10h
 
 
                              mov            ax, 4C00h                           ; protocolo de finalización del programa.
