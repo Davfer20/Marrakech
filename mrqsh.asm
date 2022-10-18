@@ -57,7 +57,7 @@ datos segment
 
     colorVerificacion    db  0
 
-    greenCoins           db  0
+    brownCoins           db  0
     redCoins             db  0
     blueCoins            db  0
     yellowCoins          db  0
@@ -153,8 +153,8 @@ datos segment
     msgDireccionE        db  "La direccion ingresada no existe",10,13,'$'
 
 
-    msgFilas             db  "Ingrese la pocicion de filas: ",10,13,"$"
-    msgColumnas          db  "Ingrese la pocicion de columnas: ",10,13,"$"
+    msgFilas             db  "Ingrese la pocicion de filas: ",0                                                                                                                                                                                     ;10,13,"$"
+    msgColumnas          db  "Ingrese la pocicion de columnas: ",0                                                                                                                                                                                  ;10,13,"$"
     msgpocision          db  "Ingrese V o H para su pocicion: ",0                                                                                                                                                                                   ;10,13,"$"
 
 
@@ -1244,17 +1244,15 @@ Bicho proc
 
                              MOV            AX,0B800H
                              MOV            ES,AX
-    ;		mov byte ptr FILBi, 9
-    ;		mov byte ptr COLBi, 23
-    ;		mov byte ptr ASTERIX, 'v'
+
                              CALL           MOVIMIENTO1
 
                              XOR            AH,AH
                              INT            16H
                              CMP            AL,'V'
-                             je             vertical_1
+                             je             tomaFilas
                              CMP            AL,'H'
-                             je             horizontal_1
+                             je             tomaFilas
                              jmp            siguex
     siguex:                  
                              mov            byte ptr Fil, 23
@@ -1268,36 +1266,39 @@ Bicho proc
                              lea            si, errorAlfombraPos
                              call           prnRot
                              jmp            finalBicho
-    vertical_1:              
-                             mov            byte ptr direccionAlfombra, al
-                             jmp            finalBicho
-    horizontal_1:            
-                             mov            byte ptr direccionAlfombra, al
-                             jmp            finalBicho
 
-    ;MOV AX, 4C00h
-    ;INT 21h
+    tomaFilas:               
+                             mov            direccion, al
+                             call           MovimientoFilas                     ;Funcion que tome las filas [0-6]
+                             call           MovimientoColumnas                  ;Funcion que tome las columnas [0-6]
 
+    ;bandera con los errores posibles
+    ;Si bander esta correcta procede a hacer lo de poner bandera (call funcionAlfombra)
+    ;Si esta mala lo que hace es no hacer el cambio y mandarlo otra vez a la interfaz
+
+    ;Haga una funcion que lea las monedas que hay en las variables y las actualize
+    ;Haga funcion que cambie el estado de las alfombras
+    ;Hacer el HASM
+
+
+
+                             jmp            finalBicho
+                           
 MOVIMIENTO1 PROC NEAR
     ; Este procedimiento pone el asterisco, hace una pasua y lo mueve un campo
   
     DESPLEGAR1:              
-
                              MOV            AL,160                              ; Calculamos BX = FIL*160+Col*2
-                             MUL            FILBi
+                             MUL            FILBi                               ;Se coloca Hasam
                              XOR            BH, BH
                              MOV            BL, COLBi
                              SHL            BX,1
                              ADD            BX,AX
 
-
-
                              MOV            DX,WORD PTR ES:[BX]                 ; Salvamos lo que hay en la pantalla
                              MOV            AX,WORD PTR ASTERIX                 ; Movemos al AX el asterisco
 
-
                              MOV            WORD PTR ES:[BX],AX                 ; Ponemos la arroba en pantalla
-
 
                              MOV            CX, PAUSA1                          ; Hacemos una pausa de 100 x 1000 nops
     P1_1:                    PUSH           CX
@@ -1306,7 +1307,6 @@ MOVIMIENTO1 PROC NEAR
                              LOOP           P2_1
                              POP            CX
                              LOOP           P1_1
-
 
                              MOV            WORD PTR ES:[BX],DX                 ; Borramos la arroba
                              jmp            revisartecla1
@@ -1323,7 +1323,6 @@ MOVIMIENTO1 PROC NEAR
 
     ;----------------------------MUEVE EL ASTERISCO---------------------------
     ALGOR1:                  
-
                              CMP            DIRBi, 0                            ; Con saltos de conejo pues ya da fuera de rango
                              JNE            PREGUNTE1_1
                              JMP            CERO_1
@@ -1473,6 +1472,49 @@ MOVIMIENTO1 PROC NEAR
                              RET
 
 MOVIMIENTO1 ENDP
+
+MovimientoFilas proc near
+
+    ;mov            byte ptr Fil, 23
+    ;mov            byte ptr Col, 1
+                             mov            dl, 22
+                             mov            dh, 1
+    ;mov            byte ptr ColB, 01000100b
+    ; mov            byte ptr ColF, 07Fh
+    ;mov            bh, ColB
+    ;mov            bl, ColF
+
+                             mov            bh, roja
+                             mov            bl, blanca
+                             
+                             lea            si, msgFilas
+                             call           prnRot
+
+                             mov            ah,01h
+                             int            21h
+                             mov            fila,ah
+
+                             ret
+
+MovimientoFilas endp
+
+MovimientoColumnas proc near
+                             mov            dl, 22
+                             mov            dh, 1
+
+                             mov            bh, roja
+                             mov            bl, blanca
+                             
+                             lea            si, msgColumnas
+                             call           prnRot
+
+                             mov            ah,01h
+                             int            21h
+                             mov            columna,ah
+
+                             ret
+
+MovimientoColumnas endp
 		   
     finalBicho:              
     ;		   mov            byte ptr Fil, 23
@@ -1546,9 +1588,9 @@ calculateTablero endp
 
 funcionAlfombra proc near
 
-                             mov            fila,0
-                             mov            columna, 2
-                             mov            colorP, 'R'
+    ;mov            fila,4
+    ;mov            columna, 3
+    ;mov            colorP, 'R'
 
                              call           calculateAlfombra
                            
@@ -1556,10 +1598,6 @@ funcionAlfombra proc near
                              mov            ah, roja
                              AlofmbraRojaV
 
-                            
-
-    ;mov            dl, 16
-    ;mov            dh, 15
                              call           calculateTablero
                              mov            bh, roja
                              mov            bl, blanca
@@ -1807,6 +1845,8 @@ Random Proc
 Random Endp
 
 direccionHasamValidacion proc near
+    ;Valida que la direccion de hasam no se invalida
+    ;DNCP es la direccion actual de Hasam
                              mov            al, DNPC
                              cmp            DNPC, 0
                              je             validacionArriba
@@ -2203,8 +2243,7 @@ FuncionesMenu proc
     auxilio:                 jmp            revisartecla                        ;HAYTECLA ;salir;JMP DESPLEGAR ; Algor
 
     ALGOR:                   
-
-                             mov            byte ptr Fil, 21
+                             mov            byte ptr Fil, 21                    ;Solo rotulos
                              mov            byte ptr Col, 0
                              mov            dl, Fil
                              mov            dh, Col
@@ -2274,7 +2313,6 @@ FuncionesMenu proc
 
 
     CERO:                    
-
                              mov            byte ptr Fil, 21
                              mov            byte ptr Col, 1
                              mov            dl, Fil
@@ -2309,20 +2347,6 @@ FuncionesMenu proc
                              jmp            salir
 
     UNO:                     
-    ;                   mov            ax, 03h                         ; borra la pantalla reiniciando el modo texto a 80x25 a 16 colores
-    ;                   int            10h
-    ;                   mov            ah, 09h
-    ;                   lea            dx, Rotulo1
-    ;                   int            21h
-    ;                   mov            ah, 09h
-    ;                   lea            dx, Rotulo2
-    ;                   int            21h
-    ;                   mov            ah, 09h
-    ;                   lea            dx, Rotulo3
-    ;                   int            21h
-    ;                   mov            ah, 09h
-    ;                   lea            dx, Rotulo4
-    ;                   int            21h
 
                              mov            byte ptr Fil, 21
                              mov            byte ptr Col, 1
@@ -2358,12 +2382,6 @@ FuncionesMenu proc
                              jmp            salir
 
     DOS:                     
-    ;                   mov            ax, 03h                         ; borra la pantalla reiniciando el modo texto a 80x25 a 16 colores
-    ;                   int            10h
-    ;                   mov            ah, 09h
-    ;                   lea            dx, Rotulo8
-    ;                   int            21h
-
                              mov            byte ptr Fil, 21
                              mov            byte ptr Col, 1
                              mov            dl, Fil
@@ -2378,12 +2396,6 @@ FuncionesMenu proc
                              jmp            salir
 
     TRES:                    
-    ;                   mov            ax, 03h                         ; borra la pantalla reiniciando el modo texto a 80x25 a 16 colores
-    ;                   int            10h
-    ;                   mov            ah, 09h
-    ;                   lea            dx, Rotulo9
-    ;                   int            21h
-
                              mov            byte ptr Fil, 21
                              mov            byte ptr Col, 1
                              mov            dl, Fil
@@ -2404,11 +2416,7 @@ FuncionesMenu proc
                              jmp            salir
 
     CUATRO:                  
-    ;                   mov            ax, 03h                         ; borra la pantalla reiniciando el modo texto a 80x25 a 16 colores
-    ;                   int            10h
-    ;                   mov            ah, 09h
-    ;                   lea            dx, Rotulo10
-    ;                   int            21h
+
 
                              mov            byte ptr Fil, 21
                              mov            byte ptr Col, 1
@@ -2430,11 +2438,7 @@ FuncionesMenu proc
                              jmp            salir
 
     CINCO:                   
-    ;                   mov            ax, 03h                         ; borra la pantalla reiniciando el modo texto a 80x25 a 16 colores
-    ;                   int            10h
-    ;                   mov            ah, 09h
-    ;                   lea            dx, Rotulo11
-    ;                   int            21h
+
 
                              mov            byte ptr Fil, 21
                              mov            byte ptr Col, 1
@@ -2456,11 +2460,6 @@ FuncionesMenu proc
                              jmp            salir
 
     SEIS:                    
-    ;                   mov            ax, 03h                         ; borra la pantalla reiniciando el modo texto a 80x25 a 16 colores
-    ;                   int            10h
-    ;                   mov            ah, 09h
-    ;                   lea            dx, Rotulo12
-    ;                   int            21h
 
                              mov            byte ptr Fil, 21
                              mov            byte ptr Col, 1
@@ -2482,11 +2481,6 @@ FuncionesMenu proc
                              jmp            salir
 
     SIETE:                   
-    ;                   mov            ax, 03h                         ; borra la pantalla reiniciando el modo texto a 80x25 a 16 colores
-    ;                   int            10h
-    ;                   mov            ah, 09h
-    ;                   lea            dx, Rotulo13
-    ;                   int            21h
 
                              mov            byte ptr Fil, 21
                              mov            byte ptr Col, 1
@@ -2505,9 +2499,7 @@ FuncionesMenu proc
 
     ;PROCESA LA TECLA DE FUNCION EXTENDIDA
     HAYTECLA:                
-    ;                   mov            ah, 09h
-    ;                   lea            dx, RotXD
-    ;                   int            21h
+
                              XOR            AH,AH
                              INT            16H
                              CMP            AL,'x'                              ;Se sale con una x minuscula
@@ -2515,10 +2507,7 @@ FuncionesMenu proc
                              jmp            REVISE_DIR
     fin1:                    jmp            fin
 			
-    ;CMP AL,0
-    ;JZ REVISE_DIR
-    ;JMP ALGOR
-			
+
     REVISE_DIR:                                                                 ;CMP AH,47H	;SI ES HOME
     ;	JNE S1
     ;	MOV DIR,4
@@ -2663,13 +2652,11 @@ FuncionesMenu endP
                              MENU
                              call           PrintMenu
 
-                             call           funcionAlfombra
+    ;call           funcionAlfombra
 
     ;Tecla
                              call           FuncionesMenu
     
-
-
                              mov            ax, 4C00h                           ; protocolo de finalización del programa.
                              int            21h
 
