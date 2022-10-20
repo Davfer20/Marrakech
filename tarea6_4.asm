@@ -212,6 +212,13 @@ datos segment
 
     redDesign            db  0CDh,0CBh,0CDh,0CBh,0CDh,0CBh,0
 
+
+    suma    dw 0
+    num     dw 0
+    variable db "000",0
+    cociente dw 0
+    residuo  dw 0
+
 datos endS
 
 pila segment stack 'stack'
@@ -1830,19 +1837,6 @@ asignarCG:
 sigueCo_7:
 
 
-			     
-                             ;mov            direccion, al
-                             ;call           MovimientoFilas                     ;Funcion que tome las filas [0-6]
-                             ;call           MovimientoColumnas                  ;Funcion que tome las columnas [0-6]
-
-    ;bandera con los errores posibles
-    ;Si bander esta correcta procede a hacer lo de poner bandera (call funcionAlfombra)
-    ;Si esta mala lo que hace es no hacer el cambio y mandarlo otra vez a la interfaz
-
-    ;Haga una funcion que lea las monedas que hay en las variables y las actualize
-    ;Haga funcion que cambie el estado de las alfombras
-    ;Hacer el HASM
-
 
 finaltomadatos:
                              jmp            finalBicho
@@ -2159,8 +2153,8 @@ moverArriba:
 cicloMA1:
 	cmp  cl, 0
 	je salirCicloMA1
-	;cmp al, 0
-	;je salirCicloMA1_2
+	cmp al, 0
+	je salirCicloMA1
 	dec al
 	loop cicloMA1
 salirCicloMA1:
@@ -2341,8 +2335,398 @@ salirProceso:
 RealizarMovimientoBicho endP
 
 
-BorrarBichoPosAct proc
-BorrarBichoPosAct endP
+;BorrarBichoPosAct proc
+;BorrarBichoPosAct endP
+
+
+IntToChar proc
+                             push           ax
+                             push           bx
+                             push           cx
+                             push           dx
+                             push           di
+                             push           si
+                             push           es
+
+ciclotraductor1:
+	cmp num, 99
+	jg centenas1
+	cmp num,9
+	jg decenas1
+	jmp unidades1	
+
+
+unidades1:
+	jmp unidadesEspa
+decenas1:
+	jmp decenasEspa
+centenas1:
+	jmp centenasEspa
+
+
+unidadesEspa:
+	cmp num, 0
+	je eceroE
+	cmp num, 1
+	je eunoE
+	cmp num, 2
+	je edosE
+	cmp num, 3
+	je etresE
+	cmp num, 4
+	je ecuatroE
+	cmp num, 5
+	je ecincoE
+	cmp num, 6
+	je eseisE
+	cmp num, 7
+	je esieteE
+	cmp num, 8
+	je eochoE
+	cmp num, 9
+	je enueveE
+eceroE:
+	mov byte ptr variable[2], '0'
+	jmp finintchar
+eunoE:
+	mov byte ptr variable[2], '1'
+	jmp finintchar
+edosE:
+	mov byte ptr variable[2], '2'
+	jmp finintchar
+etresE:
+	mov byte ptr variable[2], '3'
+	jmp finintchar
+ecuatroE:
+	mov byte ptr variable[2], '4'
+	jmp finintchar
+ecincoE:
+	mov byte ptr variable[2], '5'
+	jmp finintchar
+eseisE:
+	mov byte ptr variable[2], '6'
+	jmp finintchar
+esieteE:
+	mov byte ptr variable[2], '7'
+	jmp finintchar
+eochoE:
+	mov byte ptr variable[2], '8'
+	jmp finintchar
+enueveE:
+	mov byte ptr variable[2], '9'
+	jmp finintchar
+
+
+decenasEspa:
+	xor ax, ax
+	xor bx, bx
+	xor dx, dx
+	mov ax, word ptr num
+	mov bx, 10
+	div bx
+	mov word ptr cociente, ax
+	mov word ptr residuo, dx
+	cmp cociente, 1
+	je ediez
+	cmp cociente, 2
+	je eveinte
+	cmp cociente, 3
+	je etreinta
+	cmp cociente, 4
+	je ecuarenta
+	cmp cociente, 5
+	je ecincuenta
+	cmp cociente, 6
+	je esesenta
+	cmp cociente, 7
+	je esetenta
+	cmp cociente, 8
+	je eochenta
+	cmp cociente, 9
+	je enoventa
+ediez:
+	mov byte ptr variable[1], '1'
+	jmp siguedecenas
+eveinte:
+	mov byte ptr variable[1], '2'
+	jmp siguedecenas
+etreinta:
+	mov byte ptr variable[1], '3'
+	jmp siguedecenas
+ecuarenta:
+	mov byte ptr variable[1], '4'
+	jmp siguedecenas
+ecincuenta:
+	mov byte ptr variable[1], '5'
+	jmp siguedecenas
+esesenta:
+	mov byte ptr variable[1], '6'
+	jmp siguedecenas
+esetenta:
+	mov byte ptr variable[1], '7'
+	jmp siguedecenas
+eochenta:
+	mov byte ptr variable[1], '8'
+	jmp siguedecenas
+enoventa:
+	mov byte ptr variable[1], '9'
+	jmp siguedecenas
+siguedecenas:
+	cmp residuo, 0
+	jne nuevonum1
+	jmp finintchar
+nuevonum1:
+	xor ax, ax
+	mov ax, word ptr residuo
+	mov word ptr num, 0
+	mov word ptr num, ax
+	mov word ptr cociente, 0
+	mov word ptr residuo, 0
+	jmp ciclotraductor1
+
+
+centenasEspa:
+	xor ax, ax
+	xor bx, bx
+	xor dx, dx
+	mov ax, word ptr num
+	mov bx, 100
+	div bx
+	mov word ptr cociente, ax
+	mov word ptr residuo, dx
+	cmp cociente, 1
+	je ecien
+	cmp cociente, 2
+	je edoscientos
+	cmp cociente, 3
+	je etrescientos
+	cmp cociente, 4
+	je ecuatrocientos
+	cmp cociente, 5
+	je equinientos
+	cmp cociente, 6
+	je eseiscientos
+	cmp cociente, 7
+	je esetecientos
+	cmp cociente, 8
+	je eochocientos
+	cmp cociente, 9
+	je enovecientos
+ecien:
+	mov byte ptr variable[0], '1'
+	jmp siguecentenas
+edoscientos:
+	mov byte ptr variable[0], '2'
+	jmp siguecentenas
+etrescientos:
+	mov byte ptr variable[0], '3'
+	jmp siguecentenas
+ecuatrocientos:
+	mov byte ptr variable[0], '4'
+	jmp siguecentenas
+equinientos:
+	mov byte ptr variable[0], '5'
+	jmp siguecentenas
+eseiscientos:
+	mov byte ptr variable[0], '6'
+	jmp siguecentenas
+esetecientos:
+	mov byte ptr variable[0], '7'
+	jmp siguecentenas
+eochocientos:
+	mov byte ptr variable[0], '8'
+	jmp siguecentenas
+enovecientos:
+	mov byte ptr variable[0], '9'
+	jmp siguecentenas
+siguecentenas:
+	cmp residuo, 0
+	jne nuevonum2
+	jmp finintchar
+nuevonum2:
+	xor ax, ax
+	mov ax, word ptr residuo
+	mov word ptr num, 0
+	mov word ptr num, ax
+	mov word ptr cociente, 0
+	mov word ptr residuo, 0
+	jmp ciclotraductor1
+
+finintchar:
+    		       ;mov            byte ptr Fil, 23
+                       ;mov            byte ptr Col, 65
+                       ;mov            dl, Fil
+                       ;mov            dh, Col
+    		       ;mov	       byte ptr ColB, 01000100b
+    		       ;mov	       byte ptr ColF, 07Fh
+                       ;mov            bh, ColB
+                       ;mov            bl, ColF
+                       ;lea            si, variable
+                       ;call           prnRot
+
+                             pop            es
+                             pop            si
+                             pop            di
+                             pop            dx
+                             pop            cx
+                             pop            bx
+                             pop            ax
+                             ret
+IntToChar endP
+
+
+
+ActualizarValoresMonedas proc
+                             push           ax
+                             push           bx
+                             push           cx
+                             push           dx
+                             push           di
+                             push           si
+                             push           es
+
+	xor ax, ax
+	mov al, byte ptr brownCoins
+	mov word ptr num, ax
+	mov byte ptr variable[0], '0'
+	mov byte ptr variable[1], '0'
+	mov byte ptr variable[2], '0'
+	call IntToChar
+	xor ax, ax
+	mov al, byte ptr variable[0]
+	mov byte ptr RotD1[0], al
+	mov al, byte ptr variable[1]
+	mov byte ptr RotD1[1], al
+	mov al, byte ptr variable[2]
+	mov byte ptr RotD1[2], al
+
+	xor ax, ax
+	mov al, byte ptr redCoins
+	mov word ptr num, ax
+	mov byte ptr variable[0], '0'
+	mov byte ptr variable[1], '0'
+	mov byte ptr variable[2], '0'
+	call IntToChar
+	xor ax, ax
+	mov al, byte ptr variable[0]
+	mov byte ptr RotD2[0], al
+	mov al, byte ptr variable[1]
+	mov byte ptr RotD2[1], al
+	mov al, byte ptr variable[2]
+	mov byte ptr RotD2[2], al
+
+	xor ax, ax
+	mov al, byte ptr blueCoins
+	mov word ptr num, ax
+	mov byte ptr variable[0], '0'
+	mov byte ptr variable[1], '0'
+	mov byte ptr variable[2], '0'
+	call IntToChar
+	xor ax, ax
+	mov al, byte ptr variable[0]
+	mov byte ptr RotD3[0], al
+	mov al, byte ptr variable[1]
+	mov byte ptr RotD3[1], al
+	mov al, byte ptr variable[2]
+	mov byte ptr RotD3[2], al
+
+	xor ax, ax
+	mov al, byte ptr yellowCoins
+	mov word ptr num, ax
+	mov byte ptr variable[0], '0'
+	mov byte ptr variable[1], '0'
+	mov byte ptr variable[2], '0'
+	call IntToChar
+	xor ax, ax
+	mov al, byte ptr variable[0]
+	mov byte ptr RotD4[0], al
+	mov al, byte ptr variable[1]
+	mov byte ptr RotD4[1], al
+	mov al, byte ptr variable[2]
+	mov byte ptr RotD4[2], al
+
+                             pop            es
+                             pop            si
+                             pop            di
+                             pop            dx
+                             pop            cx
+                             pop            bx
+                             pop            ax
+                             ret
+ActualizarValoresMonedas endP
+
+
+ActualizarValoresAlfombras proc
+                             push           ax
+                             push           bx
+                             push           cx
+                             push           dx
+                             push           di
+                             push           si
+                             push           es
+
+	xor ax, ax
+	mov al, byte ptr redCarpets
+	mov word ptr num, ax
+	mov byte ptr variable[0], '0'
+	mov byte ptr variable[1], '0'
+	mov byte ptr variable[2], '0'
+	call IntToChar
+	xor ax, ax
+	mov al, byte ptr variable[1]
+	mov byte ptr RotA1[0], al
+	mov al, byte ptr variable[2]
+	mov byte ptr RotA1[1], al
+
+	xor ax, ax
+	mov al, byte ptr blueCarpets
+	mov word ptr num, ax
+	mov byte ptr variable[0], '0'
+	mov byte ptr variable[1], '0'
+	mov byte ptr variable[2], '0'
+	call IntToChar
+	xor ax, ax
+	mov al, byte ptr variable[1]
+	mov byte ptr RotA2[0], al
+	mov al, byte ptr variable[2]
+	mov byte ptr RotA2[1], al
+
+	xor ax, ax
+	mov al, byte ptr greenCarpets
+	mov word ptr num, ax
+	mov byte ptr variable[0], '0'
+	mov byte ptr variable[1], '0'
+	mov byte ptr variable[2], '0'
+	call IntToChar
+	xor ax, ax
+	mov al, byte ptr variable[1]
+	mov byte ptr RotA3[0], al
+	mov al, byte ptr variable[2]
+	mov byte ptr RotA3[1], al
+
+	xor ax, ax
+	mov al, byte ptr yellowCarpets
+	mov word ptr num, ax
+	mov byte ptr variable[0], '0'
+	mov byte ptr variable[1], '0'
+	mov byte ptr variable[2], '0'
+	call IntToChar
+	xor ax, ax
+	mov al, byte ptr variable[1]
+	mov byte ptr RotA4[0], al
+	mov al, byte ptr variable[2]
+	mov byte ptr RotA4[1], al
+
+                             pop            es
+                             pop            si
+                             pop            di
+                             pop            dx
+                             pop            cx
+                             pop            bx
+                             pop            ax
+                             ret
+ActualizarValoresAlfombras endP
+
 
     ;--------------------------------Validaciones---------------------------------------------------------------------------------------------------------
     ;-----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -3433,6 +3817,8 @@ FuncionesMenu proc
                              call           prnRot
 
                              call           Bicho
+			     call	    ActualizarValoresMonedas
+			     call	    ActualizarValoresAlfombras
 
                              jmp            salir
 
