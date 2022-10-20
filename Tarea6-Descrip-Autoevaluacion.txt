@@ -1,0 +1,29 @@
+;Para correr el programa primero debe ensamblarlo con el tasm
+;luego ligarlo con el tlink
+;y posteriormente ejecutarlo escribiendo el nombre del programa en la linea de comandos.
+;El programa despliega una interfaz grafica en la que se muestra un tablero junto a un menu.
+;El tablero es de 7x7 casillas, cada una de 6x3 (columnasxfilas) de la pantalla.
+;El menu contiene 8 opciones con las que se realizar acciones de informació y de juego.
+;Al jugar, se despliega al personaje Hassam, el cual se puede direccionar a cualquier lado.
+;Se tira un dado, tocando la tecla "i", y segun la cantidad que salga, así se movera Hassam.
+;Una vez que se movio, se solicita la posicion de la alfombra (horizontal o vertical).
+;Luego se solicita la fila y la columna de la casilla donde se quiere insertar la alfombra.
+;Tanto las filas como columnas del tablero van señaladas de la "a" a la "g".
+;Se debe escribir una coordenada de casilla que sea adyacente a Hassam.
+;Se inserta la alfombra y se solicita cualquier tecla para regresar al menu.
+;Cuando regresa al menu, toda la informacion de tablero se borra
+;Pero al elegir nuevamente la opcion de jugar partida actual se reestablece todo lo que había en el tablero.
+
+
+;Analisis de resultados
+;Desplegar ayuda: A
+;Desplegar acerca de : A
+;Agregar jugadores: A
+;Realizar jugada: A
+;Tirar dado: A
+;Mover a Hassam segun resultado del dado: A
+;Desplazamiento de Hassam por el tablero: B (llega hasta los limites del tablero, no se devuelve)
+;Solicitar datos para insertar alfombra: A
+;Insertar alfombra: A
+;Actualizar datos de los jugadores despues de cada jugada: A
+;
